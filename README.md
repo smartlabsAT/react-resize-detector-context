@@ -34,7 +34,7 @@ A lightweight React context that leverages [react-resize-detector](https://githu
 Install via npm:
 
 ```
-npm install my-breakpoint-package
+npm install react-resize-detector-context
 ```
 
 ---
@@ -47,7 +47,7 @@ Wrap your component tree with the `BreakpointProvider` and provide a breakpoint 
 
 ```typescript
 import React from 'react';
-import { BreakpointProvider, useBreakpoint } from 'my-breakpoint-package';
+import { BreakpointProvider, useBreakpoint } from 'react-resize-detector-context';
 
 const breakpoints = {
   XS: 0,
@@ -94,7 +94,7 @@ Use `BreakpointConditional` to render content only when certain breakpoint condi
 
 ```typescript
 import React from 'react';
-import { BreakpointProvider, BreakpointConditional } from 'my-breakpoint-package';
+import { BreakpointProvider, BreakpointConditional } from 'react-resize-detector-context';
 
 const breakpoints = {
   XS: 0,
@@ -132,7 +132,7 @@ You can define your own custom breakpoints with any names. For instance, using c
 
 ```typescript
 import React from 'react';
-import { BreakpointProvider, useBreakpoint } from 'my-breakpoint-package';
+import { BreakpointProvider, useBreakpoint } from 'react-resize-detector-context';
 
 const carBreakpoints = {
   Smart: 0,
