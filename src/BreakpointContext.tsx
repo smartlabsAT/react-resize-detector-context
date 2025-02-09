@@ -96,19 +96,6 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
     return active;
   }, [width, sortedBreakpoints]);
 
-  // Log error if width is undefined or 0
-  useEffect(() => {
-    if (width === undefined) {
-      console.error(
-        'BreakpointProvider: width is undefined. Ensure the target element is mounted and visible.'
-      );
-    } else if (width === 0) {
-      console.error(
-        'BreakpointProvider: width is 0. The target element might be hidden or not mounted correctly.'
-      );
-    }
-  }, [width]);
-
   // Log error if width > 0 but no breakpoint could be determined
   useEffect(() => {
     if (width !== undefined && width > 0 && currentBreakpoint === null) {

@@ -1,4 +1,5 @@
 #!/bin/sh
+export PNPM_HOME="/Users/christopherschwarz/Library/pnpm"
 
 if [ "$LEFTHOOK_VERBOSE" = "1" -o "$LEFTHOOK_VERBOSE" = "true" ]; then
   set -x

@@ -98,35 +98,6 @@ describe('BreakpointContext', () => {
     expect(contextValue?.valueByBreakpoint(mapping)).toBe('Car Mini');
   });
 
-  it('logs error if width is undefined', () => {
-    mockedUseResizeDetector.mockReturnValue({
-      width: undefined,
-      ref: React.createRef<HTMLDivElement>(),
-    });
-    render(
-      <BreakpointProvider breakpoints={{ XS: 0, SM: 500 }}>
-        <div>Test</div>
-      </BreakpointProvider>
-    );
-    expect(console.error).toHaveBeenCalledWith(
-      'BreakpointProvider: width is undefined. Ensure the target element is mounted and visible.'
-    );
-  });
-
-  it('logs error if width is 0', () => {
-    mockedUseResizeDetector.mockReturnValue({
-      width: 0,
-      ref: React.createRef<HTMLDivElement>(),
-    });
-    render(
-      <BreakpointProvider breakpoints={{ XS: 0, SM: 500 }}>
-        <div>Test</div>
-      </BreakpointProvider>
-    );
-    expect(console.error).toHaveBeenCalledWith(
-      'BreakpointProvider: width is 0. The target element might be hidden or not mounted correctly.'
-    );
-  });
 
   it('logs error if current width is less than the smallest breakpoint', () => {
     // Simulate width = 100 when the smallest breakpoint is 200
