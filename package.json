@@ -1,7 +1,7 @@
 {
 	"name": "react-resize-detector-context",
 	"description": "",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"author": "",
 	"license": "",
 	"keywords": [],
@@ -30,9 +30,7 @@
 			"import": "./dist/index.mjs"
 		}
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/@ryansonshine/cz-conventional-changelog"
