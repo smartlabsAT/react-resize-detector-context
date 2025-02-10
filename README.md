@@ -1,4 +1,4 @@
-# ⚛️ React Resize Detector Context V0.1.2
+# ⚛️ React Resize Detector Context
 
 ![Demo GIF](/doc/assets/demo.gif)
 
@@ -69,35 +69,39 @@ values.
 import React from 'react';
 import { BreakpointProvider, useBreakpoint } from 'my-breakpoint-package';
 
-
-
 const breakpoints = {
-  XS: 0, SM: 500, MD: 700, LG: 900, XL: 1100,
+  XS: 0,
+  SM: 500,
+  MD: 700,
+  LG: 900,
+  XL: 1100,
 };
 
 const ResponsiveComponent = () => {
   const { width, breakpoint, isAtLeast, valueByBreakpoint } = useBreakpoint();
-  return (<div><p>Current
-  width: {width}
-  px < /p> < p > Active
-  breakpoint: {breakpoint}
-  </p> < p > Is
-  at
-  least
-  MD: {isAtLeast('MD') ? '✅' : '❌'}
-  </p> < p > Mapping
-:
-  {
-    valueByBreakpoint({
-      XS: 'Extra Small', SM: 'Small', MD: 'Medium', LG: 'Large', XL: 'Extra Large'
-    })
-  }
-  </p> < /div>
-)
-  ;
+  return (
+    <div>
+      <p>Current width: {width}px</p>
+  <p>Active breakpoint: {breakpoint}</p>
+  <p>Is at least MD: {isAtLeast('MD') ? '✅' : '❌'}</p>
+  <p>
+  Mapping: {valueByBreakpoint({
+    XS: 'Extra Small',
+    SM: 'Small',
+    MD: 'Medium',
+    LG: 'Large',
+    XL: 'Extra Large'
+  })}
+  </p>
+  </div>
+);
 };
 
-const App = () => (<BreakpointProvider breakpoints = { breakpoints } > <ResponsiveComponent / > </BreakpointProvider>);
+const App = () => (
+  <BreakpointProvider breakpoints={breakpoints}>
+    <ResponsiveComponent />
+    </BreakpointProvider>
+);
 
 export default App;
 ```
@@ -112,30 +116,30 @@ Render content only when specific breakpoint conditions are met.
 import React from 'react';
 import { BreakpointProvider, BreakpointConditional } from 'my-breakpoint-package';
 
-
-
 const breakpoints = {
-  XS: 0, SM: 500, MD: 700, LG: 900, XL: 1100,
+  XS: 0,
+  SM: 500,
+  MD: 700,
+  LG: 900,
+  XL: 1100,
 };
 
-const ConditionalComponent = () => (<div><BreakpointConditional isAtLeast = "MD" > <p>😊 This
-content
-is
-visible
-from
-MD
-and
-up. < /p> < /BreakpointConditional> < BreakpointConditional
-isBelow = "LG" > <p>🚀 This
-content
-is
-visible
-for breakpoints below
-LG. < /p> < /BreakpointConditional> < /div>
-)
-;
+const ConditionalComponent = () => (
+  <div>
+    <BreakpointConditional isAtLeast="MD">
+    <p>😊 This content is visible from MD and up.</p>
+</BreakpointConditional>
+<BreakpointConditional isBelow="LG">
+  <p>🚀 This content is visible for breakpoints below LG.</p>
+</BreakpointConditional>
+</div>
+);
 
-const App = () => (<BreakpointProvider breakpoints = { breakpoints } > <ConditionalComponent / > </BreakpointProvider>);
+const App = () => (
+  <BreakpointProvider breakpoints={breakpoints}>
+    <ConditionalComponent />
+    </BreakpointProvider>
+);
 
 export default App;
 ```
@@ -150,32 +154,37 @@ Define your own custom breakpoints – for example, using car sizes:
 import React from 'react';
 import { BreakpointProvider, useBreakpoint } from 'my-breakpoint-package';
 
-
-
 const carBreakpoints = {
-  Smart: 0, Mini: 350, Sedan: 600, SUV: 900, Ram: 1200,
+  Smart: 0,
+  Mini: 350,
+  Sedan: 600,
+  SUV: 900,
+  Ram: 1200,
 };
 
 const CarComponent = () => {
   const { width, breakpoint, valueByBreakpoint } = useBreakpoint();
-  return (<div><p>Current
-  width: {width}
-  px < /p> < p > Active
-  car
-  size: {breakpoint}
-  </p> < p > Mapping
-:
-  {
-    valueByBreakpoint({
-      Smart: '🚗 Smart', Mini: '🚙 Mini', Sedan: '🚘 Sedan', SUV: '🚐 SUV', Ram: '🚚 Ram'
-    })
-  }
-  </p> < /div>
-)
-  ;
+  return (
+    <div>
+      <p>Current width: {width}px</p>
+  <p>Active car size: {breakpoint}</p>
+  <p>
+  Mapping: {valueByBreakpoint({
+    Smart: '🚗 Smart',
+    Mini: '🚙 Mini',
+    Sedan: '🚘 Sedan',
+    SUV: '🚐 SUV',
+    Ram: '🚚 Ram'
+  })}
+  </p>
+  </div>
+);
 };
 
-const App = () => (<BreakpointProvider breakpoints = { carBreakpoints } > <CarComponent / > </BreakpointProvider>);
+const App = () => ( <BreakpointProvider breakpoints={carBreakpoints}>
+      <CarComponent /> 
+    </BreakpointProvider>
+);
 
 export default App;
 ```
@@ -236,35 +245,39 @@ The `useBreakpoint` hook provides access to the responsive context. It returns a
 import React from 'react';
 import { BreakpointProvider, useBreakpoint } from 'my-breakpoint-package';
 
-
-
 const breakpoints = {
-  XS: 0, SM: 500, MD: 700, LG: 900, XL: 1100,
+  XS: 0,
+  SM: 500,
+  MD: 700,
+  LG: 900,
+  XL: 1100,
 };
 
 const ResponsiveComponent = () => {
   const { width, breakpoint, isAtLeast, valueByBreakpoint } = useBreakpoint();
-  return (<div><p>Current
-  width: {width}
-  px < /p> < p > Active
-  breakpoint: {breakpoint}
-  </p> < p > Is
-  at
-  least
-  MD: {isAtLeast('MD') ? '✅' : '❌'}
-  </p> < p > Mapping
-:
-  {
-    valueByBreakpoint({
-      XS: 'Extra Small', SM: 'Small', MD: 'Medium', LG: 'Large', XL: 'Extra Large',
-    })
-  }
-  </p> < /div>
-)
-  ;
+  return (
+    <div>
+      <p>Current width: {width}px</p>
+  <p>Active breakpoint: {breakpoint}</p>
+  <p>Is at least MD: {isAtLeast('MD') ? '✅' : '❌'}</p>
+  <p>
+  Mapping: {valueByBreakpoint({
+    XS: 'Extra Small',
+    SM: 'Small',
+    MD: 'Medium',
+    LG: 'Large',
+    XL: 'Extra Large',
+  })}
+  </p>
+  </div>
+);
 };
 
-const App = () => (<BreakpointProvider breakpoints = { breakpoints } > <ResponsiveComponent / > </BreakpointProvider>);
+const App = () => (
+  <BreakpointProvider breakpoints={breakpoints}>
+    <ResponsiveComponent />
+    </BreakpointProvider>
+);
 
 export default App;
 ```
