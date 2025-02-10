@@ -53,7 +53,7 @@ responsive breakpoints – all fully typed in TypeScript for excellent IDE suppo
 Install via npm:
 
 ``` bash
-npm install my-breakpoint-package
+npm install react-resize-detector-context
 ```
 
 ---
