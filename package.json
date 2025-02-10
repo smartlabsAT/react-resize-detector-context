@@ -22,7 +22,7 @@
     "storybook:build": "storybook build",
     "release": "pnpm build && pnpm release-it",
     "link:self": "pnpm link --global",
-    "prepare": "husky"
+    "prepare": "lefthook install"
   },
   "types": "./dist/index.d.ts",
   "exports": {
