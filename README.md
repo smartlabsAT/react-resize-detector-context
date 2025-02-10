@@ -1,4 +1,4 @@
-# ⚛️ React Resize Detector Context
+# ⚛️ React Resize Detector Context V0.1.2
 
 ![Demo GIF](/doc/assets/demo.gif)
 
