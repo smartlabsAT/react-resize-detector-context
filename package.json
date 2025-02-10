@@ -12,8 +12,8 @@
   "scripts": {
     "dev": "concurrently \"pnpm build --watch\" \"pnpm storybook\" \"pnpm test\" ",
     "build": "tsup",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix src",
-    "lint:ci": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint": "eslint src --fix",
+    "lint:ci": "eslint src --debug",
     "format": "prettier --write src",
     "test": "vitest",
     "test:ci": "vitest run --coverage",
@@ -40,10 +40,9 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,md}": [
+    "src/**/*.{js,jsx,ts,tsx,json,md}": [
       "prettier --write",
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   },
   "release-it": {
