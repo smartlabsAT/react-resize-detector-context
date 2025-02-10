@@ -12,7 +12,8 @@ export interface BreakpointContextType {
   breakpoints: Record<Breakpoint, number>;
   /**
    * Returns `true` if the current breakpoint is greater than or equal to the provided one.
-   * E.g.: isAtLeast('MD') returns true if the current breakpoint is MD, LG, or XL.
+   * E.g.: isAtLeast('MD') returns true if the current breakpoint is MD,
+   * LG, or XL.
    */
   isAtLeast: (size: Breakpoint) => boolean;
   /**
@@ -56,11 +57,7 @@ export interface BreakpointProviderProps {
  * - If the current width is less than the smallest breakpoint (and width > 0), an error is logged.
  * - If duplicate breakpoint values are detected, an error is logged.
  */
-export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
-                                                                        breakpoints,
-                                                                        children,
-                                                                        targetRef,
-                                                                      }) => {
+export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({ breakpoints, children, targetRef }) => {
   // If a targetRef is provided, useResizeDetector observes that element; otherwise, an internal ref is created.
   const { width, ref } = useResizeDetector({ targetRef });
 
@@ -71,16 +68,13 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
       .sort(([, a], [, b]) => a - b);
   }, [breakpoints]);
 
-  // Check for duplicate breakpoint values
+  /** Check for duplicate breakpoint values */
   useEffect(() => {
     const duplicates = sortedBreakpoints.filter(
-      ([, value], index) =>
-        sortedBreakpoints.findIndex(([, v]) => v === value) !== index
+      ([, value], index) => sortedBreakpoints.findIndex(([, v]) => v === value) !== index
     );
     if (duplicates.length > 0) {
-      console.error(
-        'BreakpointProvider: Duplicate breakpoint values detected. This may lead to unexpected behavior.'
-      );
+      console.error('BreakpointProvider: Duplicate breakpoint values detected. This may lead to unexpected behavior.');
     }
   }, [sortedBreakpoints]);
 
@@ -186,11 +180,11 @@ interface BreakpointConditionalProps {
  * Renders its children only if all provided conditions regarding the current breakpoint are met.
  */
 export const BreakpointConditional: React.FC<BreakpointConditionalProps> = ({
-                                                                              show,
-                                                                              isAtLeast: minSize,
-                                                                              isBelow: maxSize,
-                                                                              children,
-                                                                            }) => {
+  show,
+  isAtLeast: minSize,
+  isBelow: maxSize,
+  children,
+}) => {
   const { breakpoint, isAtLeast: contextIsAtLeast, isBelow: contextIsBelow } = useBreakpoint();
 
   let shouldRender = true;

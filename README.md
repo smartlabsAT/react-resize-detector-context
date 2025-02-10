@@ -307,7 +307,7 @@ The following scripts are available in this package:
   Runs tests with coverage.
 
 - **`npm run lint`**  
-  Runs biome to check (and optionally fix) your code style.
+  Runs lint to check (and optionally fix) your code style.
 
 - **`npm run release`**  
   Builds the package and triggers the release process.

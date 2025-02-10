@@ -1,22 +1,8 @@
 // src/stories/BreakpointContext.stories.tsx
-import type { Meta, StoryFn } from "@storybook/react";
-import React from "react";
-import {
-  BreakpointProvider,
-  BreakpointConditional,
-  Breakpoint,
-  useBreakpoint,
-} from "../BreakpointContext"; // Resolved via tsconfig paths
-import {
-  Box,
-  Container,
-  Card,
-  CardContent,
-  Typography,
-  LinearProgress,
-  useTheme,
-  Divider,
-} from "@mui/material";
+import type { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+import { BreakpointProvider, BreakpointConditional, Breakpoint, useBreakpoint } from '../BreakpointContext'; // Resolved via tsconfig paths
+import { Box, Container, Card, CardContent, Typography, LinearProgress, useTheme } from '@mui/material';
 
 // --- Internal Components (NOT exported as standalone stories) ---
 
@@ -27,11 +13,11 @@ export const DisplayBreakpointInfo: React.FC = () => {
   const roundedWidth = Math.round(width);
 
   const progressData = React.useMemo(() => {
-    if (!breakpoint) return { percent: 0, diff: 0, label: "N/A" };
+    if (!breakpoint) return { percent: 0, diff: 0, label: 'N/A' };
     const sortedKeys = Object.keys(bpMap) as Array<keyof typeof bpMap>;
     const currentIndex = sortedKeys.indexOf(breakpoint as keyof typeof bpMap);
     if (currentIndex === -1 || currentIndex === sortedKeys.length - 1) {
-      return { percent: 100, diff: 0, label: "💻 100% (Max)" };
+      return { percent: 100, diff: 0, label: '💻 100% (Max)' };
     }
     const lower = bpMap[sortedKeys[currentIndex]];
     const upper = bpMap[sortedKeys[currentIndex + 1]];
@@ -45,21 +31,21 @@ export const DisplayBreakpointInfo: React.FC = () => {
   }, [width, breakpoint, bpMap]);
 
   const mapping: Partial<Record<Breakpoint, string>> = {
-    XS: "😅 Extra Small",
-    SM: "😊 Small",
-    MD: "😎 Medium",
-    LG: "🤩 Large",
-    XL: "🚀 Extra Large",
+    XS: '😅 Extra Small',
+    SM: '😊 Small',
+    MD: '😎 Medium',
+    LG: '🤩 Large',
+    XL: '🚀 Extra Large',
   };
 
   const bgColor = breakpoint
     ? {
-      XS: theme.palette.error.light,
-      SM: theme.palette.warning.light,
-      MD: theme.palette.info.light,
-      LG: theme.palette.success.light,
-      XL: theme.palette.primary.light,
-    }[breakpoint as keyof typeof mapping]
+        XS: theme.palette.error.light,
+        SM: theme.palette.warning.light,
+        MD: theme.palette.info.light,
+        LG: theme.palette.success.light,
+        XL: theme.palette.primary.light,
+      }[breakpoint as keyof typeof mapping]
     : theme.palette.background.paper;
 
   return (
@@ -67,7 +53,7 @@ export const DisplayBreakpointInfo: React.FC = () => {
       sx={{
         mb: 2,
         backgroundColor: bgColor,
-        transition: "background-color 0.3s ease",
+        transition: 'background-color 0.3s ease',
         borderRadius: 0,
       }}
     >
@@ -79,31 +65,27 @@ export const DisplayBreakpointInfo: React.FC = () => {
           <strong>Current width:</strong> {roundedWidth}px
         </Typography>
         <Typography variant="body1">
-          <strong>Current breakpoint:</strong> {breakpoint ?? "none"}
+          <strong>Current breakpoint:</strong> {breakpoint ?? 'none'}
         </Typography>
         <Typography variant="body1">
-          <strong>Mapping:</strong> {valueByBreakpoint(mapping) ?? ""}
+          <strong>Mapping:</strong> {valueByBreakpoint(mapping) ?? ''}
         </Typography>
-        <Box sx={{ mt: 2, position: "relative", width: 300 }}>
-          <LinearProgress
-            variant="determinate"
-            value={progressData.percent}
-            sx={{ height: 20, borderRadius: 0 }}
-          />
+        <Box sx={{ mt: 2, position: 'relative', width: 300 }}>
+          <LinearProgress variant="determinate" value={progressData.percent} sx={{ height: 20, borderRadius: 0 }} />
           <Box
             sx={{
-              position: "absolute",
+              position: 'absolute',
               top: 0,
               left: 0,
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: theme.palette.getContrastText(bgColor || "black"),
-              fontWeight: "bold",
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: theme.palette.getContrastText(bgColor || 'black'),
+              fontWeight: 'bold',
               fontFamily: '"Courier New", Courier, monospace',
-              fontSize: "0.875rem",
+              fontSize: '0.875rem',
             }}
           >
             {progressData.label}
@@ -111,21 +93,15 @@ export const DisplayBreakpointInfo: React.FC = () => {
         </Box>
         <Box sx={{ mt: 1 }}>
           <BreakpointConditional isAtLeast="MD">
-            <Typography variant="body2">
-              🤖 Content visible from MD and up.
-            </Typography>
+            <Typography variant="body2">🤖 Content visible from MD and up.</Typography>
           </BreakpointConditional>
 
           <BreakpointConditional isAtLeast="LG">
-            <Typography variant="body2">
-              🚀 Content visible from LG and up.
-            </Typography>
+            <Typography variant="body2">🚀 Content visible from LG and up.</Typography>
           </BreakpointConditional>
 
-          <BreakpointConditional isBelow={"MD"}>
-            <Typography variant="body2">
-              👾Content visible from below MD.
-            </Typography>
+          <BreakpointConditional isBelow={'MD'}>
+            <Typography variant="body2">👾Content visible from below MD.</Typography>
           </BreakpointConditional>
         </Box>
       </CardContent>
@@ -140,11 +116,11 @@ export const CarBreakpointInfo: React.FC = () => {
   const roundedWidth = Math.round(width);
 
   const progressData = React.useMemo(() => {
-    if (!breakpoint) return { percent: 0, diff: 0, label: "N/A" };
+    if (!breakpoint) return { percent: 0, diff: 0, label: 'N/A' };
     const sortedKeys = Object.keys(bpMap) as Array<keyof typeof bpMap>;
     const currentIndex = sortedKeys.indexOf(breakpoint as keyof typeof bpMap);
     if (currentIndex === -1 || currentIndex === sortedKeys.length - 1) {
-      return { percent: 100, diff: 0, label: "💻 100% (Max)" };
+      return { percent: 100, diff: 0, label: '💻 100% (Max)' };
     }
     const lower = bpMap[sortedKeys[currentIndex]];
     const upper = bpMap[sortedKeys[currentIndex + 1]];
@@ -158,21 +134,21 @@ export const CarBreakpointInfo: React.FC = () => {
   }, [width, breakpoint, bpMap]);
 
   const carMapping: Partial<Record<Breakpoint, string>> = {
-    Smart: "🚗 Smart",
-    Mini: "🚙 Mini",
-    Sedan: "🚘 Sedan",
-    SUV: "🚐 SUV",
-    Ram: "🚚 Ram",
+    Smart: '🚗 Smart',
+    Mini: '🚙 Mini',
+    Sedan: '🚘 Sedan',
+    SUV: '🚐 SUV',
+    Ram: '🚚 Ram',
   };
 
   const bgColor = breakpoint
     ? {
-      Smart: theme.palette.info.light,
-      Mini: theme.palette.success.light,
-      Sedan: theme.palette.warning.light,
-      SUV: theme.palette.error.light,
-      Ram: theme.palette.primary.light,
-    }[breakpoint as keyof typeof carMapping]
+        Smart: theme.palette.info.light,
+        Mini: theme.palette.success.light,
+        Sedan: theme.palette.warning.light,
+        SUV: theme.palette.error.light,
+        Ram: theme.palette.primary.light,
+      }[breakpoint as keyof typeof carMapping]
     : theme.palette.background.paper;
 
   return (
@@ -180,7 +156,7 @@ export const CarBreakpointInfo: React.FC = () => {
       sx={{
         mb: 2,
         backgroundColor: bgColor,
-        transition: "background-color 0.3s ease",
+        transition: 'background-color 0.3s ease',
         borderRadius: 0,
       }}
     >
@@ -192,31 +168,27 @@ export const CarBreakpointInfo: React.FC = () => {
           <strong>Current width:</strong> {roundedWidth}px
         </Typography>
         <Typography variant="body1">
-          <strong>Current car size:</strong> {breakpoint ?? "none"}
+          <strong>Current car size:</strong> {breakpoint ?? 'none'}
         </Typography>
         <Typography variant="body1">
-          <strong>Mapping:</strong> {valueByBreakpoint(carMapping) ?? ""}
+          <strong>Mapping:</strong> {valueByBreakpoint(carMapping) ?? ''}
         </Typography>
-        <Box sx={{ mt: 2, position: "relative", width: 300 }}>
-          <LinearProgress
-            variant="determinate"
-            value={progressData.percent}
-            sx={{ height: 20, borderRadius: 0 }}
-          />
+        <Box sx={{ mt: 2, position: 'relative', width: 300 }}>
+          <LinearProgress variant="determinate" value={progressData.percent} sx={{ height: 20, borderRadius: 0 }} />
           <Box
             sx={{
-              position: "absolute",
+              position: 'absolute',
               top: 0,
               left: 0,
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: theme.palette.getContrastText(bgColor || "black"),
-              fontWeight: "bold",
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: theme.palette.getContrastText(bgColor || 'black'),
+              fontWeight: 'bold',
               fontFamily: '"Courier New", Courier, monospace',
-              fontSize: "0.875rem",
+              fontSize: '0.875rem',
             }}
           >
             {progressData.label}
@@ -224,9 +196,7 @@ export const CarBreakpointInfo: React.FC = () => {
         </Box>
         <Box sx={{ mt: 1 }}>
           <BreakpointConditional isBelow="Sedan">
-            <Typography variant="body2">
-              🏎️ Content visible only for Smart and Mini.
-            </Typography>
+            <Typography variant="body2">🏎️ Content visible only for Smart and Mini.</Typography>
           </BreakpointConditional>
         </Box>
       </CardContent>
@@ -237,7 +207,7 @@ export const CarBreakpointInfo: React.FC = () => {
 // --- Storybook Default Export ---
 // Exclude internal components (those ending with "Info") from being auto-exported as stories.
 export default {
-  title: "BreakpointContext/Examples",
+  title: 'BreakpointContext/Examples',
   excludeStories: /.*Info$/, // Excludes exports ending in "Info"
   argTypes: {},
 } as Meta;
@@ -251,6 +221,7 @@ const StandardTemplate: StoryFn = () => {
     LG: 900,
     XL: 1100,
   };
+
   const standardBoxRef = React.useRef<HTMLDivElement>(null);
 
   return (
@@ -262,15 +233,15 @@ const StandardTemplate: StoryFn = () => {
         <Box
           ref={standardBoxRef}
           sx={{
-            border: "2px dashed #ccc",
+            border: '2px dashed #ccc',
             p: 2,
-            resize: "horizontal",
-            overflow: "auto",
-            transition: "border-color 0.3s ease",
-            "&:hover": { borderColor: "primary.main" },
+            resize: 'horizontal',
+            overflow: 'auto',
+            transition: 'border-color 0.3s ease',
+            '&:hover': { borderColor: 'primary.main' },
             borderRadius: 0,
             mb: 4,
-            ml: "30px", // 30px left margin
+            ml: '30px', // 30px left margin
           }}
         >
           <DisplayBreakpointInfo />
@@ -281,7 +252,7 @@ const StandardTemplate: StoryFn = () => {
 };
 
 export const Standard = StandardTemplate.bind({});
-Standard.storyName = "Default Breakpoints";
+Standard.storyName = 'Default Breakpoints';
 
 const CarTemplate: StoryFn = () => {
   const carBreakpoints: Record<Breakpoint, number> = {
@@ -302,14 +273,14 @@ const CarTemplate: StoryFn = () => {
         <Box
           ref={carBoxRef}
           sx={{
-            border: "2px dashed #ccc",
+            border: '2px dashed #ccc',
             p: 2,
-            resize: "horizontal",
-            overflow: "auto",
-            transition: "border-color 0.3s ease",
-            "&:hover": { borderColor: "primary.main" },
+            resize: 'horizontal',
+            overflow: 'auto',
+            transition: 'border-color 0.3s ease',
+            '&:hover': { borderColor: 'primary.main' },
             borderRadius: 0,
-            ml: "30px", // 30px left margin
+            ml: '30px', // 30px left margin
           }}
         >
           <CarBreakpointInfo />
@@ -320,4 +291,4 @@ const CarTemplate: StoryFn = () => {
 };
 
 export const Car = CarTemplate.bind({});
-Car.storyName = "Custom Breakpoints";
+Car.storyName = 'Custom Breakpoints';
