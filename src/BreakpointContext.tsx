@@ -43,6 +43,11 @@ export interface BreakpointProviderProps {
    * If not provided, an internal <div ref={...}> will be rendered.
    */
   targetRef?: { current: HTMLElement | null };
+  /**
+   * Optional: Enable development mode to show console warnings and errors.
+   * Defaults to false in production (NODE_ENV === 'production').
+   */
+  devMode?: boolean;
 }
 
 /**
@@ -57,7 +62,14 @@ export interface BreakpointProviderProps {
  * - If the current width is less than the smallest breakpoint (and width > 0), an error is logged.
  * - If duplicate breakpoint values are detected, an error is logged.
  */
-export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({ breakpoints, children, targetRef }) => {
+export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
+  breakpoints,
+  children,
+  targetRef,
+  devMode,
+}) => {
+  // Determine if we should log based on devMode prop or NODE_ENV
+  const shouldLog = devMode !== undefined ? devMode : process.env.NODE_ENV !== 'production';
   // If a targetRef is provided, useResizeDetector observes that element; otherwise, an internal ref is created.
   const { width, ref } = useResizeDetector({ targetRef });
 
@@ -74,7 +86,11 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({ breakpoi
       ([, value], index) => sortedBreakpoints.findIndex(([, v]) => v === value) !== index
     );
     if (duplicates.length > 0) {
-      console.error('BreakpointProvider: Duplicate breakpoint values detected. This may lead to unexpected behavior.');
+      if (shouldLog) {
+        console.error(
+          '❌ BreakpointProvider: Duplicate breakpoint values detected. This may lead to unexpected behavior.'
+        );
+      }
     }
   }, [sortedBreakpoints]);
 
@@ -90,17 +106,30 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({ breakpoi
     return active;
   }, [width, sortedBreakpoints]);
 
+  // Log error if width is undefined or 0
+  useEffect(() => {
+    if (width === undefined || width === 0) {
+      if (shouldLog) {
+        console.error('❌ BreakpointProvider: element width is undefined or 0');
+      }
+    }
+  }, [width, shouldLog]);
+
   // Log error if width > 0 but no breakpoint could be determined
   useEffect(() => {
     if (width !== undefined && width > 0 && currentBreakpoint === null) {
       if (sortedBreakpoints.length > 0 && width < sortedBreakpoints[0][1]) {
-        console.error(
-          `BreakpointProvider: The current width (${width}px) is less than the smallest breakpoint value (${sortedBreakpoints[0][1]}px). Consider including a breakpoint with a value of 0 to cover all cases.`
-        );
+        if (shouldLog) {
+          console.error(
+            `❌ BreakpointProvider: The current width (${width}px) is less than the smallest breakpoint value (${sortedBreakpoints[0][1]}px). Consider including a breakpoint with a value of 0 to cover all cases.`
+          );
+        }
       } else {
-        console.error(
-          'BreakpointProvider: No breakpoint could be determined from the provided configuration. Check your breakpoints object.'
-        );
+        if (shouldLog) {
+          console.error(
+            '❌ BreakpointProvider: No breakpoint could be determined from the provided configuration. Check your breakpoints object.'
+          );
+        }
       }
     }
   }, [width, currentBreakpoint, sortedBreakpoints]);
