@@ -128,7 +128,7 @@ describe('BreakpointContext', () => {
       </BreakpointProvider>
     );
     expect(console.error).toHaveBeenCalledWith(
-      'BreakpointProvider: Duplicate breakpoint values detected. This may lead to unexpected behavior.'
+      '❌ BreakpointProvider: Duplicate breakpoint values detected. This may lead to unexpected behavior.'
     );
   });
 });
