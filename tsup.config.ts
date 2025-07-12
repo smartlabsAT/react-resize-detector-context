@@ -7,7 +7,7 @@ import { type Options, defineConfig } from 'tsup';
 const common: Options = {
   entry: ['src/index.ts'],
   treeshake: false,
-  sourcemap: 'inline',
+  sourcemap: true,
   minify: true,
   clean: true,
   dts: true,
@@ -60,7 +60,11 @@ export default defineConfig({
   async onSuccess() {
     // If you want need to add a use statement to files, you can use the following code:
     // await _addUseStatement('dist/react', 'client');
-    await linkSelf();
+    
+    // Uncomment the following line if you want to automatically link the package after building:
+    // await linkSelf();
+    
+    console.log(`✅ Build completed! Run 'pnpm link ${await getPackageName()} --global' to link this package locally.`);
   },
   ...common,
 });
