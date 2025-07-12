@@ -1,13 +1,23 @@
 {
   "name": "react-resize-detector-context",
-  "description": "",
-  "version": "0.1.0",
-  "author": "",
-  "license": "",
-  "keywords": [],
+  "description": "React context that detects element width and provides responsive breakpoint utilities with conditional rendering components",
+  "version": "0.1.2",
+  "author": "Christopher Schwarz",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "resize",
+    "detector",
+    "breakpoint",
+    "responsive",
+    "context",
+    "width",
+    "conditional",
+    "rendering"
+  ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/smartlabsat/react-resize-detector-context"
   },
   "scripts": {
     "dev": "concurrently \"pnpm build --watch\" \"pnpm storybook\" \"pnpm test\" ",
@@ -60,19 +70,19 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
-    "@emotion/styled": "^11.14.0",
-    "@eslint/js": "^9.20.0",
+    "@emotion/styled": "^11.15.0",
+    "@eslint/js": "^9.31.0",
     "@mui/material": "^6.4.3",
     "@ryansonshine/commitizen": "4.2.8",
     "@ryansonshine/cz-conventional-changelog": "3.3.4",
-    "@storybook/addon-essentials": "8.4.7",
-    "@storybook/addon-interactions": "8.4.7",
-    "@storybook/addon-links": "8.4.7",
+    "@storybook/addon-essentials": "8.6.14",
+    "@storybook/addon-interactions": "8.6.14",
+    "@storybook/addon-links": "8.6.14",
     "@storybook/addon-webpack5-compiler-swc": "2.0.0",
-    "@storybook/blocks": "8.4.7",
-    "@storybook/react": "8.4.7",
-    "@storybook/react-webpack5": "8.4.7",
-    "@storybook/test": "8.4.7",
+    "@storybook/blocks": "8.6.14",
+    "@storybook/react": "8.6.14",
+    "@storybook/react-webpack5": "8.6.14",
+    "@storybook/test": "8.6.14",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "^16.1.0",
     "@types/node": "22.10.5",
@@ -82,26 +92,26 @@
     "@types/testing-library__jest-dom": "^5.14.9",
     "@vitest/coverage-v8": "2.1.8",
     "concurrently": "9.1.2",
-    "eslint": "^9.20.0",
-    "eslint-plugin-react": "^7.37.4",
+    "eslint": "^9.31.0",
+    "eslint-plugin-react": "^7.37.5",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
     "jsdom": "25.0.1",
     "lefthook": "1.10.1",
     "lint-staged": "^15.4.3",
-    "prettier": "^3.5.0",
+    "prettier": "^3.6.2",
     "prop-types": "15.8.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-test-renderer": "18.3.1",
     "release-it": "17.11.0",
-    "storybook": "8.4.7",
+    "storybook": "8.6.14",
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "tsup": "8.3.5",
     "tsx": "4.19.2",
     "typescript": "5.7.2",
-    "typescript-eslint": "^8.23.0",
+    "typescript-eslint": "^8.36.0",
     "vitest": "^2.1.8"
   },
   "peerDependencies": {
@@ -114,7 +124,6 @@
     }
   },
   "dependencies": {
-    "@emotion/styled": "^11.14.0",
     "react-resize-detector": "^12.0.2"
   }
 }
