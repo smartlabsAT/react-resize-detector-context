@@ -1,10 +1,22 @@
 # ⚛️ React Resize Detector Context
 
+
 ![Demo GIF](/doc/assets/demo.gif)
+
+
 
 A lightweight React context that leverages [react-resize-detector](https://github.com/maslianok/react-resize-detector) to dynamically detect the
 current breakpoint based on an element's width. It provides utility functions and helper components to conditionally render content based on
 responsive breakpoints – all fully typed in TypeScript for excellent IDE support. 😎
+
+[![npm version](https://img.shields.io/npm/v/react-resize-detector-context.svg)](https://www.npmjs.com/package/react-resize-detector-context)
+[![npm downloads](https://img.shields.io/npm/dm/react-resize-detector-context.svg)](https://www.npmjs.com/package/react-resize-detector-context)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/react-resize-detector-context)](https://bundlephobia.com/package/react-resize-detector-context)
+[![codecov](https://codecov.io/gh/smartlabsat/react-resize-detector-context/branch/main/graph/badge.svg)](https://codecov.io/gh/smartlabsat/react-resize-detector-context)
+[![CI](https://github.com/smartlabsat/react-resize-detector-context/actions/workflows/ci.yml/badge.svg)](https://github.com/smartlabsat/react-resize-detector-context/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ---
 
@@ -23,6 +35,7 @@ responsive breakpoints – all fully typed in TypeScript for excellent IDE suppo
     - [useBreakpoint Hook](#usebreakpoint-hook)
 - [Available Scripts](#available-scripts)
 - [Contribution Guidelines](#contribution-guidelines)
+- [Changelog](#changelog)
 - [License](#license)
 
 ---
@@ -67,7 +80,7 @@ values.
 
 ```typescript
 import React from 'react';
-import { BreakpointProvider, useBreakpoint } from 'my-breakpoint-package';
+import { BreakpointProvider, useBreakpoint } from 'react-resize-detector-context';
 
 const breakpoints = {
   XS: 0,
@@ -114,7 +127,7 @@ Render content only when specific breakpoint conditions are met.
 
 ```typescript
 import React from 'react';
-import { BreakpointProvider, BreakpointConditional } from 'my-breakpoint-package';
+import { BreakpointProvider, BreakpointConditional } from 'react-resize-detector-context';
 
 const breakpoints = {
   XS: 0,
@@ -152,7 +165,7 @@ Define your own custom breakpoints – for example, using car sizes:
 
 ```typescript
 import React from 'react';
-import { BreakpointProvider, useBreakpoint } from 'my-breakpoint-package';
+import { BreakpointProvider, useBreakpoint } from 'react-resize-detector-context';
 
 const carBreakpoints = {
   Smart: 0,
@@ -243,7 +256,7 @@ The `useBreakpoint` hook provides access to the responsive context. It returns a
 
 ```typescript
 import React from 'react';
-import { BreakpointProvider, useBreakpoint } from 'my-breakpoint-package';
+import { BreakpointProvider, useBreakpoint } from 'react-resize-detector-context';
 
 const breakpoints = {
   XS: 0,
@@ -337,6 +350,12 @@ Contributions are very welcome! If you would like to help improve this package, 
    If you find bugs or have suggestions, please open an issue to discuss before starting work on a pull request.
 
 Let's build something awesome together! 🚀✨
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for a list of changes.
 
 ---
 
