@@ -35,6 +35,7 @@ responsive breakpoints – all fully typed in TypeScript for excellent IDE suppo
     - [useBreakpoint Hook](#usebreakpoint-hook)
 - [Available Scripts](#available-scripts)
 - [Contribution Guidelines](#contribution-guidelines)
+- [Roadmap](#roadmap)
 - [Changelog](#changelog)
 - [License](#license)
 
@@ -350,6 +351,12 @@ Contributions are very welcome! If you would like to help improve this package, 
    If you find bugs or have suggestions, please open an issue to discuss before starting work on a pull request.
 
 Let's build something awesome together! 🚀✨
+
+---
+
+## Roadmap
+
+Check out our [ROADMAP.md](./ROADMAP.md) to see what features are planned for future releases!
 
 ---
 
