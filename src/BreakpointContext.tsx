@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useMemo, useEffect } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
+import { logger } from './utils/logger';
 
 export type Breakpoint = string; // Allow arbitrary breakpoint names
 
@@ -96,9 +97,10 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
 
     if (duplicates.length > 0) {
       if (shouldLog) {
-        console.error(
-          '❌ BreakpointProvider: Duplicate breakpoint values detected. This may lead to unexpected behavior.'
-        );
+        logger.error('Duplicate breakpoint values detected', {
+          duplicates: duplicates.map(([key, value]) => ({ key, value })),
+          message: 'This may lead to unexpected behavior',
+        });
       }
     }
   }, [sortedBreakpoints, shouldLog]);
@@ -119,7 +121,10 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
   useEffect(() => {
     if (width === undefined || width === 0) {
       if (shouldLog) {
-        console.error('❌ BreakpointProvider: element width is undefined or 0');
+        logger.error('Element width is undefined or 0', {
+          width,
+          message: 'Element cannot be measured properly',
+        });
       }
     }
   }, [width, shouldLog]);
@@ -129,15 +134,20 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
     if (width !== undefined && width > 0 && currentBreakpoint === null) {
       if (sortedBreakpoints.length > 0 && width < sortedBreakpoints[0][1]) {
         if (shouldLog) {
-          console.error(
-            `❌ BreakpointProvider: The current width (${width}px) is less than the smallest breakpoint value (${sortedBreakpoints[0][1]}px). Consider including a breakpoint with a value of 0 to cover all cases.`
-          );
+          logger.error('Current width is less than smallest breakpoint', {
+            currentWidth: width,
+            smallestBreakpoint: sortedBreakpoints[0][1],
+            smallestBreakpointName: sortedBreakpoints[0][0],
+            suggestion: 'Consider including a breakpoint with a value of 0 to cover all cases',
+          });
         }
       } else {
         if (shouldLog) {
-          console.error(
-            '❌ BreakpointProvider: No breakpoint could be determined from the provided configuration. Check your breakpoints object.'
-          );
+          logger.error('No breakpoint could be determined', {
+            width,
+            breakpointsConfig: sortedBreakpoints,
+            suggestion: 'Check your breakpoints object configuration',
+          });
         }
       }
     }

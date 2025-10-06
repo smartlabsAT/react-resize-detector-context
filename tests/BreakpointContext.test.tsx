@@ -111,7 +111,12 @@ describe('BreakpointContext', () => {
       </BreakpointProvider>
     );
     expect(console.error).toHaveBeenCalledWith(
-      expect.stringContaining('The current width (100px) is less than the smallest breakpoint value (200px).')
+      '[BreakpointProvider] Current width is less than smallest breakpoint',
+      expect.objectContaining({
+        currentWidth: 100,
+        smallestBreakpoint: 200,
+        smallestBreakpointName: 'XS'
+      })
     );
   });
 
@@ -128,7 +133,11 @@ describe('BreakpointContext', () => {
       </BreakpointProvider>
     );
     expect(console.error).toHaveBeenCalledWith(
-      '❌ BreakpointProvider: Duplicate breakpoint values detected. This may lead to unexpected behavior.'
+      '[BreakpointProvider] Duplicate breakpoint values detected',
+      expect.objectContaining({
+        duplicates: expect.any(Array),
+        message: 'This may lead to unexpected behavior'
+      })
     );
   });
 });
