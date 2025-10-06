@@ -82,9 +82,18 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
 
   /** Check for duplicate breakpoint values */
   useEffect(() => {
-    const duplicates = sortedBreakpoints.filter(
-      ([, value], index) => sortedBreakpoints.findIndex(([, v]) => v === value) !== index
-    );
+    const seenValues = new Set<number>();
+    const duplicates: Array<[Breakpoint, number]> = [];
+
+    for (const entry of sortedBreakpoints) {
+      const [, value] = entry;
+      if (seenValues.has(value)) {
+        duplicates.push(entry);
+      } else {
+        seenValues.add(value);
+      }
+    }
+
     if (duplicates.length > 0) {
       if (shouldLog) {
         console.error(
@@ -92,7 +101,7 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
         );
       }
     }
-  }, [sortedBreakpoints]);
+  }, [sortedBreakpoints, shouldLog]);
 
   // Determine the current breakpoint based on the measured width. 📏
   const currentBreakpoint = useMemo(() => {
