@@ -1,7 +1,7 @@
 {
   "name": "react-resize-detector-context",
   "description": "React context that detects element width and provides responsive breakpoint utilities with conditional rendering components",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "author": "Christopher Schwarz",
   "license": "MIT",
   "keywords": [
