@@ -1,5 +1,5 @@
 // src/stories/BreakpointContext.stories.tsx
-import type { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
 import { BreakpointProvider, BreakpointConditional, Breakpoint, useBreakpoint } from '../BreakpointContext'; // Resolved via tsconfig paths
 import { Box, Container, Card, CardContent, Typography, LinearProgress, useTheme } from '@mui/material';
