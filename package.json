@@ -75,9 +75,10 @@
     "node": ">=20.0.0"
   },
   "devDependencies": {
+    "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@eslint/js": "^9.39.2",
-    "@mui/material": "^6.4.3",
+    "@mui/material": "^9.0.1",
     "@playwright/test": "^1.60.0",
     "@ryansonshine/commitizen": "4.2.8",
     "@ryansonshine/cz-conventional-changelog": "3.3.4",
