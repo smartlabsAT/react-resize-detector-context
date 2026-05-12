@@ -27,9 +27,13 @@
     "format": "prettier --write src",
     "test": "vitest",
     "test:ci": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:install": "playwright install --with-deps chromium",
     "typecheck": "tsc --noEmit",
     "commit": "cz",
     "storybook": "storybook dev -p 6006",
+    "storybook:e2e": "storybook dev -p 6010 --ci --no-open",
     "storybook:build": "storybook build",
     "release": "pnpm build && pnpm release-it",
     "link:self": "pnpm link --global",
@@ -68,12 +72,13 @@
     }
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "devDependencies": {
     "@emotion/styled": "^11.14.1",
     "@eslint/js": "^9.39.2",
     "@mui/material": "^6.4.3",
+    "@playwright/test": "^1.60.0",
     "@ryansonshine/commitizen": "4.2.8",
     "@ryansonshine/cz-conventional-changelog": "3.3.4",
     "@storybook/addon-essentials": "8.6.14",
