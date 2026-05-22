@@ -9,6 +9,8 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+    "types": ["node"],
+    "ignoreDeprecations": "6.0",
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

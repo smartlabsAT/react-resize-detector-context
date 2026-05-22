@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useEffect } from 'react';
+import React, { createContext, use, useMemo, useEffect } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import { logger } from './utils/logger';
 
@@ -151,7 +151,7 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
         }
       }
     }
-  }, [width, currentBreakpoint, sortedBreakpoints]);
+  }, [width, currentBreakpoint, sortedBreakpoints, shouldLog]);
 
   // Helper function to get the index of a breakpoint in the sorted array. 🔍
   const getBreakpointIndex = (size: Breakpoint): number => {
@@ -175,7 +175,7 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
   }
 
   return (
-    <BreakpointContext.Provider
+    <BreakpointContext
       value={{
         width: width ?? 0,
         breakpoint: currentBreakpoint,
@@ -188,7 +188,7 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
       {/* If a targetRef is provided, that ref is already attached to an external element.
           Otherwise, render a <div ref={ref}> to observe its size. 📐 */}
       {targetRef ? children : <div ref={ref}>{children}</div>}
-    </BreakpointContext.Provider>
+    </BreakpointContext>
   );
 };
 
@@ -197,7 +197,7 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
  * Throws an error if used outside of a BreakpointProvider. ⚠️
  */
 export const useBreakpoint = (): BreakpointContextType => {
-  const context = useContext(BreakpointContext);
+  const context = use(BreakpointContext);
   if (!context) {
     throw new Error('useBreakpoint must be used within a BreakpointProvider');
   }

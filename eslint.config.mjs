@@ -1,7 +1,13 @@
+// Flat config for ESLint 10.
+// @eslint-react replaces the legacy eslint-plugin-react (no ESLint 10 support
+// at time of writing) and ships both the rules-of-hooks and exhaustive-deps
+// rules under its own namespace.
+
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
+import eslintReact from '@eslint-react/eslint-plugin';
+import storybook from 'eslint-plugin-storybook';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -17,12 +23,9 @@ export default [
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
   {
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
+    files: ['**/*.{ts,tsx}'],
+    ...eslintReact.configs['recommended-typescript'],
   },
+  ...storybook.configs['flat/recommended'],
 ];
