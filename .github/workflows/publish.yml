@@ -1,6 +1,3 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
-
 name: Publish
 
 on:
@@ -13,9 +10,19 @@ permissions:
   pages: write
   id-token: write
 
+# Allow only one concurrent Pages deployment, but keep an in-progress
+# deploy from being cancelled by a new run (skip the new one instead).
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
-  publish:
+  storybook-pages:
+    name: Deploy Storybook to GitHub Pages
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -34,33 +41,60 @@ jobs:
           node-version: 22
           cache: 'pnpm'
 
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - uses: actions/cache@v4
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+      - name: Build Storybook
+        run: pnpm storybook:build
 
-      - name: Deploy Storybook
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.2
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          install_command: pnpm install --frozen-lockfile
-          build_command: pnpm storybook:build
           path: storybook-static
-        env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Build and publish to npm
-      #   if: github.ref == 'refs/tags/v*' # Only run on version tags
-      #   run: |
-      #     pnpm build
-      #     npm login --registry=https://registry.npmjs.org/ --scope=your-scope
-      #     npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.YOUR_NPM_AUTH_TOKEN }}
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  npm-publish:
+    name: Publish package to npm
+    runs-on: ubuntu-latest
+    # Gate on release events so manual workflow_dispatch runs (e.g. to
+    # re-deploy Pages) don't accidentally try to re-publish the same
+    # version to npm.
+    if: github.event_name == 'release'
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Publish to npm
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
