@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.7] - 2026-05-22
+
+CI plumbing only — no runtime/library changes. Tarball is identical to 0.2.6.
+
+### Fixed
+- `Publish` workflow: replaced `bitovi/github-actions-storybook-to-github-pages@v1.0.2`
+  (broken due to its transitive `actions/upload-artifact@v3` dependency being
+  disabled by GitHub) with a native Pages deploy chain
+  (`actions/configure-pages@v5` + `actions/upload-pages-artifact@v3` +
+  `actions/deploy-pages@v4`). v0.2.6's Pages deploy had failed silently for
+  this reason; v0.2.7 restores it.
+- `Publish` workflow: reactivated the previously commented-out npm publish step.
+  Now runs `npm publish --provenance --access public` with `id-token: write`
+  for OIDC-signed provenance attestations, gated on `release` events so manual
+  `workflow_dispatch` reruns don't try to re-publish.
+
+### Required for the workflow
+
+- Repo secret `NPM_TOKEN` (npm Granular Access Token scoped to
+  `react-resize-detector-context` with read+write) must be configured for the
+  `npm-publish` job to authenticate.
+
 ## [0.2.6] - 2026-05-12
 
 Comprehensive Q2 2026 dependency upgrade (Epic #18).
@@ -91,7 +113,8 @@ Comprehensive Q2 2026 dependency upgrade (Epic #18).
 - Storybook stories with examples
 - Comprehensive documentation
 
-[Unreleased]: https://github.com/smartlabsat/react-resize-detector-context/compare/v0.2.6...HEAD
+[Unreleased]: https://github.com/smartlabsat/react-resize-detector-context/compare/v0.2.7...HEAD
+[0.2.7]: https://github.com/smartlabsat/react-resize-detector-context/compare/v0.2.6...v0.2.7
 [0.2.6]: https://github.com/smartlabsat/react-resize-detector-context/compare/v0.2.5...v0.2.6
 [0.2.0]: https://github.com/smartlabsat/react-resize-detector-context/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/smartlabsat/react-resize-detector-context/releases/tag/v0.1.2
